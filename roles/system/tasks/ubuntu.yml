@@ -36,13 +36,14 @@
     append: true
   become: true
 
-- name: "System | Set hosts"
-  ansible.builtin.template:
-    dest: "/etc/hosts"
-    src: hosts.j2
-    mode: "0644"
-  become: true
-  when: not ansible_host_environment_is_wsl
+# TODO: Fix this on containers
+# - name: "System | Set hosts"
+#   ansible.builtin.template:
+#     dest: "/etc/hosts"
+#     src: hosts.j2
+#     mode: "0644"
+#   become: true
+#   when: not ansible_host_environment_is_wsl
 
 - name: System | Detecting win32yank
   ansible.builtin.stat:

@@ -1,0 +1,44 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// Base Image README at: https://github.com/devcontainers/templates/tree/main/src/docker-in-docker
+{
+  "name": "dotfiles-dev-con",
+  "build": {
+    "dockerfile": "./Dockerfile",
+    "context": "."
+  },
+  "initializeCommand": "echo 'Initializing Dev Container...'",
+  "postCreateCommand": "./.devcontainer/postCreateCommand.sh",
+  "postStartCommand": "./.devcontainer/postStartCommand.sh",
+  "onCreateCommand": "echo 'On Create Command...'",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": "false",
+      "username": "vscode",
+      "userUid": "1000",
+      "userGid": "1000",
+      "upgradePackages": "true"
+    },
+    "ghcr.io/devcontainers-contrib/features/actionlint:1": {
+      "version": "latest"
+    },
+    // This is needed to install the devcontainer-cli
+    "ghcr.io/devcontainers/features/node:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "github.vscode-github-actions",
+        "github.vscode-pull-request-github",
+        "gitHub.copilot",
+        "gitHub.copilot-chat",
+        "mutantdino.resourcemonitor",
+        "DavidAnson.vscode-markdownlint",
+        "streetsidesoftware.code-spell-checker",
+        "mechatroner.rainbow-csv",
+        "mhutchie.git-graph"
+      ]
+    }
+  },
+  "remoteUser": "vscode",
+  "updateRemoteUserUID": true
+}
