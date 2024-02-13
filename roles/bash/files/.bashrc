@@ -103,7 +103,6 @@ plugins=(
   git
   progress
   xterm
-  zoxide
 )
 
 # Which plugins would you like to conditionally load? (plugins can be found in ~/.oh-my-bash/plugins/*)
