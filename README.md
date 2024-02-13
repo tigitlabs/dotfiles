@@ -1,6 +1,7 @@
 
 ![dotfiles-logo](https://github.com/TechDufus/dotfiles/assets/46715299/6c1d626d-28d2-41e3-bde5-981d9bf93462)
 ---
+
 Fully automated development environment for [TechDufus](https://www.twitch.tv/TechDufus) on Twitch.
 
 You can watch a quick 'tour' here on YouTube:
@@ -50,7 +51,6 @@ Below is a list of all available values. Not all are required but incorrect valu
 | system_host           | dict `(see System Hosts below)`     | no       |
 | bash_public           | dict `(see Environment below)`      | no       |
 | bash_private          | dict `(see Environment below)`      | no       |
-
 
 #### Environment
 
@@ -161,20 +161,21 @@ bash_private:
 
 ### vault.secret
 
-The `vault.secret` file allows you to encrypt values with `Ansible vault` and store them securely in source control. Create a file located at `~/.config/dotfiles/vault.secret` with a secure password in it.
+The `vault.secret` file allows you to encrypt values with `Ansible vault` and store them securely in source control. Create a file located at `$HOME/.config/dotfiles/vault.secret` with a secure password in it.
 
 ```bash
-vim ~/.ansible-vault/vault.secret
+mkdir -p $HOME/.config/dotfiles
+vim $HOME/.config/dotfiles/vault.secret/vault.secret
 ```
 
 To then encrypt values with your vault password use the following:
 
 ```bash
-$ ansible-vault encrypt_string --vault-password-file $HOME/.ansible-vault/vault.secret "mynewsecret" --name "MY_SECRET_VAR"
-$ cat myfile.conf | ansible-vault encrypt_string --vault-password-file $HOME/.ansible-vault/vault.secret --stdin-name "myfile"
+ansible-vault encrypt_string --vault-password-file $HOME/.config/dotfiles/vault.secret "mynewsecret" --name "MY_SECRET_VAR"
+cat myfile.conf | ansible-vault encrypt_string --vault-password-file $HOME/.config/dotfiles/vault.secret --stdin-name "myfile"
 ```
 
-> NOTE: This file will automatically be detected by the playbook when running `dotfiles` command to decrypt values. Read more on Ansible Vault [here](https://docs.ansible.com/ansible/latest/user_guide/vault.html).
+> NOTE: This file will automatically be detected by the playbook when running `dotfiles` command to decrypt values.
 
 ## Usage
 
@@ -191,6 +192,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/tigitlabs/dotfiles/main/
 ```
 
 If you want to run only a specific role, you can specify the following bash command:
+
 ```bash
 curl -fsSL https://raw.githubusercontent.com/tigitlabs/dotfiles/main/bin/dotfiles | bash -s -- --tags comma,seperated,tags
 ```
@@ -218,6 +220,7 @@ This `dotfiles` command is available to you after the first use of this repo, as
 Any flags or arguments you pass to the `dotfiles` command are passed as-is to the `ansible-playbook` command.
 
 For Example: Running the tmux tag with verbosity
+
 ```bash
 dotfiles -t tmux -vvv
 ```

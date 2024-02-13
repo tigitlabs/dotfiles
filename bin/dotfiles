@@ -85,7 +85,7 @@ set -e
 
 # Paths
 CONFIG_DIR="$HOME/.config/dotfiles"
-VAULT_SECRET="$HOME/.ansible-vault/vault.secret"
+VAULT_SECRET="$HOME/.config/dotfiles/vault.secret"
 DOTFILES_DIR="$HOME/.dotfiles"
 SSH_DIR="$HOME/.ssh"
 IS_FIRST_RUN="$HOME/.dotfiles_run"
