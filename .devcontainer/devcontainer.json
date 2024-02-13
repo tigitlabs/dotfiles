@@ -8,7 +8,7 @@
   },
   "initializeCommand": "echo 'Initializing Dev Container...'",
   "postCreateCommand": "./.devcontainer/postCreateCommand.sh",
-  "postStartCommand": "echo 'Post Start Command...'",
+  "postStartCommand": "./.devcontainer/postStartCommand.sh",
   "onCreateCommand": "echo 'On Create Command...'",
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2": {
