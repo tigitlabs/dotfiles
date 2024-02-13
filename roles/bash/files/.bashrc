@@ -76,13 +76,8 @@ completions=(
   docker
   git
   gh
-  go
-  helm
-  kubectl
   ssh
   system
-  terraform
-  kubectl
   tmux
   vault
 )
@@ -96,7 +91,6 @@ aliases=(
   general
   ls
   misc
-  terraform
 )
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-bash/plugins/*)
@@ -107,9 +101,6 @@ plugins=(
   ansible
   bashmarks
   git
-  goenv
-  golang
-  kubectl
   progress
   xterm
   zoxide
@@ -132,9 +123,9 @@ source "$OSH"/oh-my-bash.sh
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='nvim'
+  export EDITOR='vim'
 else
-  export EDITOR='nvim'
+  export EDITOR='vim'
 fi
 
 # Compilation flags
@@ -163,9 +154,4 @@ done
 [ -f ~/.bash_lumen ] && source ~/.bash_lumen
 [ -f ~/.fzf.bash ]   && source ~/.fzf.bash
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-toilet "TechDufus" -F border:gay -f emboss2
-
+toilet "TigitLabs" -F border:gay -f emboss2
