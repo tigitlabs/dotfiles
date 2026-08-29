@@ -1,6 +1,7 @@
 default_roles:
   - system
   - bash
+  - aionui
   - docker
   - fonts
   - git
