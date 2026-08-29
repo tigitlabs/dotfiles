@@ -1,0 +1,46 @@
+---
+- name: "AionUi | Select package architecture"
+  ansible.builtin.set_fact:
+    aionui_architecture: "{{ {'x86_64': 'amd64', 'aarch64': 'arm64'}.get(ansible_architecture, 'unsupported') }}"
+
+- name: "AionUi | Validate package architecture"
+  ansible.builtin.assert:
+    that:
+      - aionui_architecture != 'unsupported'
+    fail_msg: "AionUi does not provide a package for {{ ansible_architecture }}."
+
+- name: "AionUi | Gather installed packages"
+  ansible.builtin.package_facts:
+    manager: auto
+
+- name: "AionUi | Select installed version"
+  ansible.builtin.set_fact:
+    aionui_installed_version: >-
+      {{
+        ansible_facts.packages.get('aionui', [])
+        | map(attribute='version')
+        | first
+        | default('0.0.0', true)
+      }}
+
+- name: "AionUi | Install"
+  when: aionui_installed_version is version(aionui_version, '<')
+  become: true
+  block:
+    - name: "AionUi | Download package"
+      ansible.builtin.get_url:
+        url: "https://static.aionui.com/releases/{{ aionui_version }}/AionUi-{{ aionui_version }}-linux-{{ aionui_architecture }}.deb"
+        dest: "/tmp/AionUi-{{ aionui_version }}-linux-{{ aionui_architecture }}.deb"
+        checksum: "{{ aionui_checksums[aionui_architecture] }}"
+        mode: "0644"
+
+    - name: "AionUi | Install package"
+      ansible.builtin.apt:
+        deb: "/tmp/AionUi-{{ aionui_version }}-linux-{{ aionui_architecture }}.deb"
+        state: present
+
+  always:
+    - name: "AionUi | Remove downloaded package"
+      ansible.builtin.file:
+        path: "/tmp/AionUi-{{ aionui_version }}-linux-{{ aionui_architecture }}.deb"
+        state: absent
